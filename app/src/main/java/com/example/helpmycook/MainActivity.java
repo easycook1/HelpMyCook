@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     name2 = user.getDisplayName();
                     email2 =user.getEmail();
                     id2 = user.getUid();
-                    prov = user.getProviderId().toString();
+                    prov = user.getProviderId();
 
                     insertFirebase(name2, email2,id2,prov);
                 //    Log.e("name:", name2);

@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="facebook_application_id">648285559076538</string> <string name="fb_login_protocol_scheme">fb648285559076538</string>
+
+
+    <string name="app_name">HelpMyCook</string>
+</resources>

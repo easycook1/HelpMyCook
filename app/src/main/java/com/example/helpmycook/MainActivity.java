@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.Scopes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -27,17 +29,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
+    private static final String PROVEEDOR_DESCONOCIDO = "password";
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthLis;
     private TextView correotxt;
     private TextView provetxt;
-
+    private String email2;
+    private String name2;
+    private String id2;
+    private String prov;
 
 
     @Override
@@ -58,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if(user != null){
                     onSetDataUser(user.getDisplayName(),user.getEmail());
+                    name2 = user.getDisplayName();
+                    email2 =user.getEmail();
+                    id2 = user.getUid();
+                    prov = user.getProviderId().toString();
+
+                    insertFirebase(name2, email2,id2,prov);
+                //    Log.e("name:", name2);
+                //    Log.e("email:", email2);
                 }else{
 
                     onLimpiarcache();
@@ -80,13 +96,18 @@ public class MainActivity extends AppCompatActivity {
                             .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), googleIdp, facebookIkdp))
 
                             .build(), RC_SIGN_IN);
+
+
+
+
+                     //  insertFirebase(name2, email2);
                 }
             }
         };
 
 
         //codigo para serial SHA facebook
-
+/*
         PackageInfo info = null;
         try {
             info = getPackageManager().getPackageInfo(
@@ -108,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         // fin - SHA
 
-
+*/
 
     }
 
@@ -121,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         correotxt.setText(email);
         provetxt.setText(username);
 
+       // insertFirebase(username,email);
     }
 
 
@@ -129,12 +151,26 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RC_SIGN_IN){
-            if(requestCode == RESULT_OK){
-               // Toast.makeText(this,"bienvenido.........",Toast.LENGTH_SHORT).show();
-            }else{
-               // Toast.makeText(this,"algo fallo",Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(MainActivity.this,"Bienvenido....",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(MainActivity.this,"Error al logear",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void insertFirebase(String username, String email, String id, String prove){
+        //
+        Map<String, Object> map = new HashMap<>();
+        map.put("nombre",username);
+     // map.put("proveedor",prove);
+        map.put("correo",email);
+        map.put("tipoUsuario","Normal");
+        map.put("tipoCuenta","Gratuita");
+        map.put("fechaCreacion", "18/03/2020");
+        map.put("FechaIniSuscri","30/03/2020");
+        map.put("FechaFinSuscrip","30/04/2020");
+
+        mDatabase.child("Users").child(id).setValue(map);
+
     }
 
     @Override

@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //codigo para serial SHA facebook
-/*
+
         PackageInfo info = null;
         try {
             info = getPackageManager().getPackageInfo(
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         // fin - SHA
 
-*/
+
 
     }
 

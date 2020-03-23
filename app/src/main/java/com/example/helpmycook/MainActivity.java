@@ -23,8 +23,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -73,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
                     prov = user.getProviderId();
 
                     insertFirebase(name2, email2,id2,prov);
-                //    Log.e("name:", name2);
-                //    Log.e("email:", email2);
+                 //   selectFirebase(email2);
+
                 }else{
 
                     onLimpiarcache();
@@ -173,6 +177,41 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.child("Users").child(id).setValue(map);
 
     }
+
+
+    private void selectFirebase(String emailL){
+
+
+
+        Query query = mDatabase.child("Users");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+
+                    for (DataSnapshot ds: dataSnapshot.getChildren()){
+                        String correoF = ds.child("correo").getValue().toString();
+
+
+                        if(correoF.equals(emailL)){
+                            String susF = ds.child("tipoCuenta").getValue().toString();
+                            Toast.makeText(MainActivity.this,"tipo de sus:"+susF,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
 
 
 

@@ -39,8 +39,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-    private static final String PROVEEDOR_DESCONOCIDO = "password";
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthLis;
@@ -97,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
                             .setTosAndPrivacyPolicyUrls(
                                     "https://example.com/terms.html",
                                     "https://example.com/privacy.html")
-                  //          .setTosUrl("http://databaseremote.esy.es/RegisterLite/html/privaciddad.html")
                             .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), googleIdp, facebookIkdp))
-
+                            .setLogo(R.drawable.logo1)
+                            .setTheme(R.style.ThemaLogin)
                             .build(), RC_SIGN_IN);
 
 
@@ -182,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
     private void selectFirebase(String emailL){
 
 
-
         Query query = mDatabase.child("Users");
 
         query.addValueEventListener(new ValueEventListener() {
@@ -209,10 +206,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
 
     @Override

@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthLis;
     private TextView correotxt;
     private TextView provetxt;
+    private TextView select1;
     private String email2;
     private String name2;
     private String id2;
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
         correotxt = findViewById(R.id.correo);
         provetxt = findViewById(R.id.prove);
+        select1 = findViewById(R.id.select);
+
+        obtenerCategoria();
 
         mAuthLis = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -136,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void obtenerCategoria(){
+
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+
+        databaseAccess.open();
+        String name = "1";
+        ArrayList<Categorias> cate = databaseAccess.lista(name);
+
+        for (int i = 0; i < cate.size(); i ++) {
+            Log.d("INICIA ","categorias= "+cate.get(i).getCategoria());
+
+        }
+
+        select1.setText(cate.get(0).getCategoria()+"-"+cate.get(1).getCategoria());
+        //    Log.e("felipe","3"+cate+"-");
+
+        databaseAccess.close();
+    }
+
 
     private void onLimpiarcache(){
         onSetDataUser("","");
@@ -154,7 +178,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RC_SIGN_IN){
-            Toast.makeText(MainActivity.this,"Bienvenido....",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(MainActivity.this,"Bienvenido....",Toast.LENGTH_SHORT).show();
+
+
         }else{
             Toast.makeText(MainActivity.this,"Error al logear",Toast.LENGTH_SHORT).show();
         }

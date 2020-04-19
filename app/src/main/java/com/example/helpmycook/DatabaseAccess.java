@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseAccess {
 
     private SQLiteOpenHelper openHelper;
@@ -39,20 +41,43 @@ public class DatabaseAccess {
         }
     }
 
+    /*
     //query
+
     public String getAddress(String name){
 
+        ArrayList <String> listaCate = new ArrayList<>();
 
-        c=db.rawQuery("select * from where name = '"+name+"'", new String[]{});
+    //    c=db.rawQuery("select descripcion from ingredientes where id = '"+name+"'", new String[]{});
+        c=db.rawQuery("select descripcion from categorias ", new String[]{});
         StringBuffer buffer = new StringBuffer();
 
         while (c.moveToNext()){
+
+         //   listaCate.add(c.getString(0));
+
             String address = c.getString(0);
             buffer.append(""+address);
         }
         return buffer.toString();
+    }
+//clase vector
+
+*/
+
+    public ArrayList<Categorias> lista(String name){
+
+        ArrayList<Categorias> categorias = new ArrayList<Categorias>();
+
+        c=db.rawQuery("select descripcion from categorias ", null);
 
 
+        while (c.moveToNext()){
+
+               categorias.add(new Categorias(c.getString(0)));
+
+        }
+        return categorias;
     }
 
 }

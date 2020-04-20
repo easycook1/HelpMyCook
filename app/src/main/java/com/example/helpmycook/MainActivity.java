@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthLis;
-    private TextView correotxt;
-    private TextView provetxt;
+    private TextView nametxt;
     private TextView select1;
     private String email2;
     private String name2;
@@ -61,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        correotxt = findViewById(R.id.correo);
-        provetxt = findViewById(R.id.prove);
+        nametxt = findViewById(R.id.nombre);
+   //     provetxt = findViewById(R.id.prove);
         select1 = findViewById(R.id.select);
 
         obtenerCategoria();
@@ -137,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
         // fin - SHA
 
-
-
     }
 
     private void obtenerCategoria(){
@@ -166,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onSetDataUser(String username, String email) {
-        correotxt.setText(email);
-        provetxt.setText(username);
+     //   correotxt.setText(email);
+        nametxt.setText(username);
 
        // insertFirebase(username,email);
     }

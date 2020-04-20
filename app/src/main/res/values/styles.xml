@@ -11,4 +11,55 @@
     <style name="ThemaLogin" parent="FirebaseUI">
         <item name="android:windowBackground">@drawable/fondorece</item>
     </style>
+
+
+    <style name="full_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="middle_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="three_quarter_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">510dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
+    <style name="one_quarter__container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">170dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="Button_ok">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:text">¡LISTO!</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:radius">5dp</item>
+        <item name="android:fontFamily">@font/komikah</item>
+    </style>
+
+    <style name="textView_HMC">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/komikah</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#FF0036</item>
+    </style>
+
+    <style name="textView_food">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/komikah</item>
+        <item name="android:textSize">8dp</item>
+        <item name="android:textColor">#FF0036</item>
+    </style>
 </resources>

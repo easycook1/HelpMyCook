@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:id="@+id/principal_screen"
+        tools:context=".ScreenPrincipal">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/background_cook"></include>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintCategories"
+            style="@style/one_quarter_container"
+            android:background="@drawable/container"
+            app:layout_constraintBottom_toTopOf="@+id/constraintFood"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/textView_HMC"
+                app:layout_constraintBottom_toTopOf="@id/reciclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.027" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reciclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/container"
+                android:foregroundGravity="center"
+                android:textAlignment="center"
+                app:layout_constraintHorizontal_weight="100"
+                app:layout_constraintVertical_weight="80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintFood"
+            style="@style/three_quarter_container"
+            android:background="@drawable/container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintCategories">
+
+
+            <RelativeLayout
+                android:id="@+id/finder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/textFood"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="4dp">
+
+                <EditText
+                    android:id="@+id/editTextSearch"
+                    style="@style/find_food"
+                    android:background="@drawable/style_find_food"
+                    android:importantForAutofill="no"></EditText>
+
+                <ImageButton
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/editTextSearch"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/close"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/searchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/editTextSearch"
+                    android:layout_alignTop="@+id/editTextSearch"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/magnifying_glass" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/button"
+                style="@style/Button_ok"
+                android:background="@drawable/style_button_ok"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.965">
+
+            </Button>
+
+            <TextView
+                android:id="@+id/textFood"
+                style="@style/textView_food"
+                android:text="Texto comida"
+                app:layout_constraintTop_toBottomOf="@id/finder"
+                app:layout_constraintBottom_toTopOf="@id/textTitles"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/textTitles"
+                style="@style/textView_HMC"
+                android:text="Texto de titulos"
+                app:layout_constraintTop_toBottomOf="@id/textFood"
+                app:layout_constraintBottom_toTopOf="@id/button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -5,4 +5,5 @@
 
 
     <string name="app_name">HelpMeCook</string>
+    <string name="txv_selectCategory">selecciona categoria</string>
 </resources>

@@ -79,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     prov = user.getProviderId();
 
                     insertFirebase(name2, email2,id2,prov);
-                 //   selectFirebase(email2);
+
+
+
+                    //   selectFirebase(email2);
 
                 }else{
 
@@ -136,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
 
         // fin - SHA
 
+        Intent i = new Intent(this, ScreenPrincipal.class);
+        startActivity(i);
+
     }
 
     private void obtenerCategoria(){
@@ -151,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        select1.setText(cate.get(0).getCategoria()+"-"+cate.get(1).getCategoria());
-        //    Log.e("felipe","3"+cate+"-");
+//        select1.setText(cate.get(0).getCategoria()+"-"+cate.get(1).getCategoria()+"prueba");
+
 
         databaseAccess.close();
     }
@@ -176,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == RC_SIGN_IN){
           //  Toast.makeText(MainActivity.this,"Bienvenido....",Toast.LENGTH_SHORT).show();
-
 
         }else{
             Toast.makeText(MainActivity.this,"Error al logear",Toast.LENGTH_SHORT).show();

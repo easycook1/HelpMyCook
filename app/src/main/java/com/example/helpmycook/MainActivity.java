@@ -14,13 +14,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -103,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                                     "https://example.com/terms.html",
                                     "https://example.com/privacy.html")
                             .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), googleIdp, facebookIkdp))
-                            .setLogo(R.drawable.logo1)
+                            .setLogo(R.drawable.helpmecook)
                             .setTheme(R.style.ThemaLogin)
                             .build(), RC_SIGN_IN);
 
@@ -139,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
         // fin - SHA
 
-        Intent i = new Intent(this, ScreenPrincipal.class);
-        startActivity(i);
+        //Intent i = new Intent(this, ScreenPrincipal.class);
+        //startActivity(i);
 
     }
 

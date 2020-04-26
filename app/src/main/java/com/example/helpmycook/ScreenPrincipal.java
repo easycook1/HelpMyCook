@@ -52,6 +52,8 @@ public class ScreenPrincipal extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_principal);
 
+        new MainActivity().onCreate(null);
+
         searchButton = findViewById(R.id.searchButton);
         buttonDelete = findViewById(R.id.buttonDelete);
         editTextSearch = findViewById(R.id.editTextSearch);

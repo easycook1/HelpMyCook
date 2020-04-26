@@ -9,7 +9,8 @@
     </style>
 
     <style name="ThemaLogin" parent="FirebaseUI">
-        <item name="android:windowBackground">@drawable/fondorece</item>
+        <item name="android:windowBackground">@drawable/background_food</item>
+        <item name="android:panelBackground">@drawable/container</item>
     </style>
 
 

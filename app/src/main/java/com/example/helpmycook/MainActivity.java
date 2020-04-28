@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthLis;
+    private Button btnready;
     private TextView nametxt;
     private TextView select1;
     private String email2;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
@@ -60,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         nametxt = findViewById(R.id.nombre);
    //     provetxt = findViewById(R.id.prove);
-        select1 = findViewById(R.id.select);
+        //     select1 = findViewById(R.id.select);
+        btnready = findViewById(R.id.ready);
+
+
 
         obtenerCategoria();
 
@@ -112,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+
+        btnready.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ScreenPrincipal.class);
+                startActivity(intent);
+            }
+        });
 
 
         //codigo para serial SHA facebook
@@ -233,17 +249,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
 
+        //  super.onPause();
+        return;
+
+    }
+
+    /*
     @Override
     public void onBackPressed(){
         if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
-            super.onBackPressed();
+          //  super.onBackPressed();
+            super.onPause();
             return;
         }else {
             Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
         }
         tiempoPrimerClick = System.currentTimeMillis();
     }
+
+     */
 
     @Override
     protected void onResume() {
@@ -260,25 +287,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_salir:
-                AuthUI.getInstance().signOut(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-
-    }
 
 }

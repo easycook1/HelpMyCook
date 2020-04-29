@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthLis;
     private Button btnready;
     private TextView nametxt;
-    private TextView select1;
+    private TextView frase;
     private String email2;
     private String name2;
     private String id2;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         nametxt = findViewById(R.id.nombre);
+        frase = findViewById(R.id.frase);
    //     provetxt = findViewById(R.id.prove);
         //     select1 = findViewById(R.id.select);
         btnready = findViewById(R.id.ready);
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     prov = user.getProviderId();
 
                     insertFirebase(name2, email2,id2,prov);
+                    selectFrase();
 
 
 
@@ -248,6 +251,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void selectFrase(){
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(5-1) + 1;
+
+        String nRandom = String.valueOf(randomNumber);
+
+        Toast.makeText(MainActivity.this,"numero"+randomNumber,Toast.LENGTH_SHORT).show();
+
+        mDatabase.child("frases").child(nRandom).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+                    String nombre = dataSnapshot.child(nRandom).getValue(String.class);
+                    frase.setText(nombre);
+                }
+                //ya tenemos los datos desde Firebase, podemos actualizar la UI
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+
 
     @Override
     public void onBackPressed(){

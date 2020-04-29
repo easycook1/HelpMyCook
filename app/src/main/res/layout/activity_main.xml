@@ -7,11 +7,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/correo"
-        android:textAlignment="center"
+        android:id="@+id/frase"
         android:layout_width="334dp"
         android:layout_height="20dp"
-        android:text="Listo para tu nueva receta,"
+        android:text="null"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -27,7 +27,7 @@
         android:text="prove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo" />
+        app:layout_constraintTop_toBottomOf="@+id/frase" />
 
     <Button
         android:id="@+id/ready"

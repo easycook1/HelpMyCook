@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                     prov = user.getProviderId();
 
                     insertFirebase(name2, email2,id2,prov);
-                    selectFrase();
+                    //selectFrase();
+                    contadorRegistros();
 
 
 
@@ -252,14 +253,42 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void selectFrase(){
+    private void contadorRegistros(){
+        // Toast.makeText(MainActivity.this,"numero"+randomNumber,Toast.LENGTH_SHORT).show();
 
+        mDatabase.child("frases").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+                    long cantidadR = dataSnapshot.getChildrenCount();
+                    int enviatmp = (int) cantidadR;
+                    int envia = enviatmp +1;
+
+                    selectFrase(envia,1);
+                }
+                //ya tenemos los datos desde Firebase, podemos actualizar la UI
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+
+
+
+    private void selectFrase(int max, int min){
+
+     //   Toast.makeText(MainActivity.this,"numero"+max,Toast.LENGTH_SHORT).show();
         Random random = new Random();
-        int randomNumber = random.nextInt(5-1) + 1;
+        int randomNumber = random.nextInt(max-min) + min;
 
         String nRandom = String.valueOf(randomNumber);
 
-        Toast.makeText(MainActivity.this,"numero"+randomNumber,Toast.LENGTH_SHORT).show();
 
         mDatabase.child("frases").child(nRandom).addValueEventListener(new ValueEventListener() {
             @Override

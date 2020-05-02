@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
 
         databaseAccess.open();
+
         String name = "1";
         ArrayList<Categorias> cate = databaseAccess.lista(name);
 
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-//        select1.setText(cate.get(0).getCategoria()+"-"+cate.get(1).getCategoria()+"prueba");
+     // select1.setText(cate.get(0).getCategoria());
 
 
         databaseAccess.close();

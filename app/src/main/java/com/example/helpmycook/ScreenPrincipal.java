@@ -214,6 +214,7 @@ public class ScreenPrincipal extends AppCompatActivity{
 
 */
 
+
         String langname [] = new String[50];
         Integer langlogo [] = new Integer[50];
         int int1;

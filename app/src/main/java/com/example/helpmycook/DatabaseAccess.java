@@ -69,12 +69,12 @@ public class DatabaseAccess {
 
         ArrayList<Categorias> categorias = new ArrayList<Categorias>();
 
-        c=db.rawQuery("select descripcion from categorias ", null);
+        c=db.rawQuery("select id, descripcion, icono from categorias ", null);
 
 
         while (c.moveToNext()){
 
-               categorias.add(new Categorias(c.getString(0)));
+               categorias.add(new Categorias(c.getInt(0), c.getString(1), c.getString(2)));
 
         }
         return categorias;

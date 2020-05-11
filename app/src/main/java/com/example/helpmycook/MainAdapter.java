@@ -58,10 +58,10 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
                 nameCategory = "Proteínas";
             break;
             case "Lacteos":
-        nameCategory = "Lácteos";
+                nameCategory = "Lácteos";
             break;
             case "Cereales":
-    nameCategory = "Cereales";
+                nameCategory = "Cereales";
             break;
             default:
                 throw new IllegalStateException("Categoria Invalida: " + nameCategory);

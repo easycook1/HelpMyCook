@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        obtenerCategoria();
+      //  obtenerCategoria();
 
         mAuthLis = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void contadorRegistros(){
         // Toast.makeText(MainActivity.this,"numero"+randomNumber,Toast.LENGTH_SHORT).show();

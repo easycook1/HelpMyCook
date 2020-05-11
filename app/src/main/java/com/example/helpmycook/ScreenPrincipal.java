@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +34,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -158,9 +163,41 @@ public class ScreenPrincipal extends AppCompatActivity{
         editTextSearch.setText("");
     }
 
+
+    private void obtenerCategoria(){
+
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+
+        databaseAccess.open();
+        String name = "1";
+        ArrayList<Categorias> cate = databaseAccess.lista(name);
+
+        for (int i = 0; i < cate.size(); i ++) {
+            Log.d("INICIA ","categorias= "+cate.get(i).getCategoria());
+
+        }
+        Toast.makeText(this,cate.get(0).categoria,Toast.LENGTH_SHORT).show();
+
+//        select1.setText(cate.get(0).getCategoria()+"-"+cate.get(1).getCategoria()+"prueba");
+
+
+        databaseAccess.close();
+    }
+
+
     public void callReciclerView(){
+        try {
+
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+
+        databaseAccess.open();
+        String name = "1";
+        ArrayList<Categorias> cate = databaseAccess.lista(name);
+
         reciclerView = findViewById(R.id.reciclerView);
 
+        ImageButton prueba = new ImageButton(this);
+/*
         Integer[] langlogo = {
                 R.drawable.im0,
                 R.drawable.im1,
@@ -175,22 +212,59 @@ public class ScreenPrincipal extends AppCompatActivity{
                 R.drawable.im3,
                 R.drawable.im4};
 
-        String[] langname = {"Vegetales","Proteinas","Lacteos","Cereales","Vegetales","Proteinas","Lacteos","Cereales","Vegetales","Proteinas","Lacteos","Cereales"};
+*/
 
-        mainModels = new ArrayList<>();
-        for(int i = 0; i < langlogo.length; i++){
-            MainModel model = new MainModel(langlogo[i],langname[i]);
-            mainModels.add(model);
+        String langname [] = new String[50];
+        Integer langlogo [] = new Integer[50];
+        int int1;
+
+
+        for (int i = 0; i < cate.size(); i ++) {
+
+
+            String base64String = cate.get(4).icono;
+            String base64Image = base64String.split(",")[1];
+
+            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            prueba.setImageBitmap(decodedByte);
+            int1 = prueba.getId();
+
+
+            langname[i] = cate.get(i).categoria;
+            langlogo[i] = int1;
+
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                ScreenPrincipal.this,LinearLayoutManager.HORIZONTAL,false
-        );
+        Log.e("INICIA3 ","categorias "+cate.get(4).id);
+        Log.e("INICIA4 ","categorias "+cate.get(4).categoria);
+        Log.e("INICIA5 ","categorias "+cate.get(4).icono);
 
-        reciclerView.setLayoutManager(layoutManager);
-        reciclerView.setItemAnimator(new DefaultItemAnimator());
-        mainAdapter  = new MainAdapter(ScreenPrincipal.this, mainModels);
-        reciclerView.setAdapter(mainAdapter);
+
+        databaseAccess.close();
+
+            mainModels = new ArrayList<>();
+            for(int j = 0; j < langlogo.length; j++){
+                MainModel model = new MainModel(langlogo[j],langname[j]);
+                mainModels.add(model);
+            }
+
+
+
+
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(
+                        ScreenPrincipal.this,LinearLayoutManager.HORIZONTAL,false
+                );
+                reciclerView.setLayoutManager(layoutManager);
+                reciclerView.setItemAnimator(new DefaultItemAnimator());
+                mainAdapter  = new MainAdapter(ScreenPrincipal.this, mainModels);
+                reciclerView.setAdapter(mainAdapter);
+            }catch (Exception e){
+                Toast.makeText(this,""+e,Toast.LENGTH_LONG).show();
+
+            }
     }
 
     public void validateKeyboard() {

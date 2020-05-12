@@ -10,22 +10,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,11 +29,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -107,15 +100,14 @@ public class ScreenPrincipal extends AppCompatActivity{
 
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(this.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.background_cook, null);
-        constrain11 = (ConstraintLayout) view.findViewById(R.id.sumadre);
+        constrain11 = (ConstraintLayout) view.findViewById(R.id.constraintBackCook);
 
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) constrain11.getLayoutParams();
-        params.height = size.y; // here is one modification for example. modify anything else you want :)
+        params.height = (int) (l1*2); // here is one modification for example. modify anything else you want :)
         constrain11.setLayoutParams(params); // request the view to use the new modified params
 }catch (Exception e){
     Toast.makeText(this,e+"",Toast.LENGTH_SHORT).show();
 }*/
-
 
         constraintLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -186,56 +178,29 @@ public class ScreenPrincipal extends AppCompatActivity{
         databaseAccess.close();
     }
 
-
     public void callReciclerView(){
-        Drawable drawable;
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-
         databaseAccess.open();
         String name = "1";
         ArrayList<Categorias> cate = databaseAccess.lista(name);
 
         reciclerView = findViewById(R.id.reciclerView);
 
-        ImageButton prueba = new ImageButton(this);
-/*
-        Integer[] langlogo = {
-                R.drawable.im0,
-                R.drawable.im1,
-                R.drawable.im3,
-                R.drawable.im4,
-                R.drawable.im0,
-                R.drawable.im1,
-                R.drawable.im3,
-                R.drawable.im4,
-                R.drawable.im0,
-                R.drawable.im1,
-                R.drawable.im3,
-                R.drawable.im4};
-
-*/
-
-
         String langname [] = new String[cate.size()];
-        Bitmap langlogo [] = new Bitmap[cate.size()];
-
-
+        Drawable langlogo [] = new Drawable[cate.size()];
 
         for (int i = 0; i < cate.size(); i ++) {
-
-
             String base64String = cate.get(10).icono;
             String base64Image = base64String.split(",")[1];
 
             byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
+	        Drawable drawable;
+	        drawable = new BitmapDrawable(decodedByte);
 
-
-
-            langname[i] = cate.get(i).categoria;
-            langlogo[i] =  decodedByte;
-
+	        langname[i] = cate.get(i).categoria;
+            langlogo[i] =  drawable;
         }
 
         Log.e("INICIA3 ","categorias "+cate.get(4).id);
@@ -245,23 +210,20 @@ public class ScreenPrincipal extends AppCompatActivity{
 
         databaseAccess.close();
 
-            mainModels = new ArrayList<>();
-            for(int j = 0; j < langlogo.length; j++){
-                MainModel model = new MainModel(langlogo[j],langname[j]);
-                mainModels.add(model);
-            }
+        mainModels = new ArrayList<>();
+        for(int j = 0; j < langlogo.length; j++){
+            MainModel model = new MainModel(langlogo[j],langname[j]);
+            mainModels.add(model);
+        }
 
-
-                LinearLayoutManager layoutManager = new LinearLayoutManager(
-                        ScreenPrincipal.this,LinearLayoutManager.HORIZONTAL,false
-                );
-                reciclerView.setLayoutManager(layoutManager);
-                reciclerView.setItemAnimator(new DefaultItemAnimator());
-                mainAdapter  = new MainAdapter(ScreenPrincipal.this, mainModels);
-                reciclerView.setAdapter(mainAdapter);
-
-
-            }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                ScreenPrincipal.this,LinearLayoutManager.HORIZONTAL,false
+        );
+        reciclerView.setLayoutManager(layoutManager);
+        reciclerView.setItemAnimator(new DefaultItemAnimator());
+        mainAdapter  = new MainAdapter(ScreenPrincipal.this, mainModels);
+        reciclerView.setAdapter(mainAdapter);
+    }
 
 
     public void validateKeyboard() {
@@ -298,8 +260,6 @@ public class ScreenPrincipal extends AppCompatActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
 
     @Override
@@ -307,8 +267,5 @@ public class ScreenPrincipal extends AppCompatActivity{
 
           //  super.onPause();
             return;
-
     }
-
-
 }

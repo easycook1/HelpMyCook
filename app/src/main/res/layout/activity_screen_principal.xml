@@ -14,9 +14,7 @@
         android:id="@+id/principal_screen"
         tools:context=".ScreenPrincipal">
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/background_cook"></include>
+        <include layout="@layout/background_cook"></include>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintCategories"

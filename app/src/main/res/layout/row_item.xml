@@ -19,7 +19,7 @@
             android:layout_height="60dp"
             android:id="@+id/image_button"
             android:layout_weight="100"
-            android:background="@drawable/im0">
+     >
         </ImageButton>
 
         <TextView

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -186,8 +188,7 @@ public class ScreenPrincipal extends AppCompatActivity{
 
 
     public void callReciclerView(){
-        try {
-
+        Drawable drawable;
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
 
         databaseAccess.open();
@@ -215,26 +216,25 @@ public class ScreenPrincipal extends AppCompatActivity{
 */
 
 
-        String langname [] = new String[50];
-        Integer langlogo [] = new Integer[50];
-        int int1;
+        String langname [] = new String[cate.size()];
+        Bitmap langlogo [] = new Bitmap[cate.size()];
+
 
 
         for (int i = 0; i < cate.size(); i ++) {
 
 
-            String base64String = cate.get(4).icono;
+            String base64String = cate.get(10).icono;
             String base64Image = base64String.split(",")[1];
 
             byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            prueba.setImageBitmap(decodedByte);
-            int1 = prueba.getId();
+
 
 
             langname[i] = cate.get(i).categoria;
-            langlogo[i] = int1;
+            langlogo[i] =  decodedByte;
 
         }
 
@@ -252,9 +252,6 @@ public class ScreenPrincipal extends AppCompatActivity{
             }
 
 
-
-
-
                 LinearLayoutManager layoutManager = new LinearLayoutManager(
                         ScreenPrincipal.this,LinearLayoutManager.HORIZONTAL,false
                 );
@@ -262,11 +259,10 @@ public class ScreenPrincipal extends AppCompatActivity{
                 reciclerView.setItemAnimator(new DefaultItemAnimator());
                 mainAdapter  = new MainAdapter(ScreenPrincipal.this, mainModels);
                 reciclerView.setAdapter(mainAdapter);
-            }catch (Exception e){
-                Toast.makeText(this,""+e,Toast.LENGTH_LONG).show();
+
 
             }
-    }
+
 
     public void validateKeyboard() {
         Rect r = new Rect();

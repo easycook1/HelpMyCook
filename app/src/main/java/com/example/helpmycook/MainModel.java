@@ -1,15 +1,17 @@
 package com.example.helpmycook;
 
+import android.graphics.Bitmap;
+
 class MainModel {
-    Integer langlogo;
+    Bitmap langlogo;
     String langname;
 
-    public MainModel(Integer langlogo, String langname){
+    public MainModel(Bitmap langlogo, String langname){
         this.langname = langname;
         this.langlogo = langlogo;
     }
 
-    public int getLanglogo() {
+    public Bitmap getLanglogo() {
         return langlogo;
     }
 

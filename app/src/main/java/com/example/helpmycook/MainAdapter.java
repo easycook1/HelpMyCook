@@ -33,7 +33,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
 
     @Override
     public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
-        holder.imageButton.setBackgroundResource(mainModels.get(position).getLanglogo());
+        holder.imageButton.setImageBitmap(mainModels.get(position).getLanglogo());
         holder.textView.setText(mainModels.get(position).getLangname());
         holder.imageButton.setTag(mainModels.get(position).getLangname());
     }

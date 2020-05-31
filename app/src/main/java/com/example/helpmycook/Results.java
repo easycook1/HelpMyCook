@@ -11,5 +11,6 @@ public class Results {
 
     public int getIdReceta() {
         return idReceta;
+        
     }
 }

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseAccess {
 
@@ -78,6 +79,25 @@ public class DatabaseAccess {
 
         }
         return categorias;
+    }
+
+    public ArrayList<Results> resul(String idIngrediente){
+
+        ArrayList<Results> resul = new ArrayList<>();
+        String[] arrayIdIngrediente = idIngrediente.split(",");
+
+        for (int i =0; i<=arrayIdIngrediente.length; i ++) {
+            String idIng = arrayIdIngrediente[i];
+            c=db.rawQuery("select recetas_idReceta from recetaIngrediente where ingredientes_idIngrediente = '"+idIng+"'", null);
+
+            while (c.moveToNext()){
+
+                resul.add(new Results(c.getInt(0)));
+
+            }
+        }
+
+        return resul;
     }
 
 }

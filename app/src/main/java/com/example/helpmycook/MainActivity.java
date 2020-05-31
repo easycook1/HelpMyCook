@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
       //  obtenerCategoria();
+        obtenerResultados();
 
         mAuthLis = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -177,6 +178,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
      // select1.setText(cate.get(0).getCategoria());
+
+
+        databaseAccess.close();
+    }
+
+    private void obtenerResultados(){
+
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+
+        databaseAccess.open();
+
+        String idIng = "12,10";
+        ArrayList<Results> ingre = databaseAccess.resul(idIng);
+
+        for (int i = 0; i < ingre.size(); i ++) {
+            Log.e("INICIA ","resultados= "+ingre.get(i).getIdReceta());
+
+        }
+
+        // select1.setText(cate.get(0).getCategoria());
 
 
         databaseAccess.close();
